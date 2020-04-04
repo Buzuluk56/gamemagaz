@@ -5,14 +5,14 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-    <link rel="stylesheet" href="css/libs.min.css">
-    <link rel="stylesheet" href="css/main.css">
-    <link rel="stylesheet" href="css/media.css">
+    <link rel="stylesheet" href="{{ asset('css/libs.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/main.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/media.css') }}">
 </head>
 <body>
 <div class="main-wrapper">
     <header class="main-header">
-        <div class="logotype-container"><a href="#" class="logotype-link"><img src="img/logo.png" alt="Логотип"></a></div>
+        <div class="logotype-container"><a href="#" class="logotype-link"><img src="{{ asset('img/logo.png') }}" alt="Логотип"></a></div>
         <nav class="main-navigation">
             <ul class="nav-list">
                 <li class="nav-list__item"><a href="/" class="nav-list__item__link">Главная</a></li>
@@ -31,7 +31,7 @@
                     <div class="payment-basket__status__basket"><span class="payment-basket__status__basket-value">0</span><span class="payment-basket__status__basket-value-descr">товаров</span></div>
                 </div>
             </div>
-            <div class="authorization-block"><a href="#" class="authorization-block__link">Регистрация</a><a href="#" class="authorization-block__link">Войти</a></div>
+            <div class="authorization-block"><a href="{{ route('register') }}" class="authorization-block__link">Регистрация</a><a href="{{ route('login') }}" class="authorization-block__link">Войти</a></div>
         </div>
     </header>
     <div class="middle">
@@ -40,27 +40,26 @@
                 <div class="sidebar-item__title">Категории</div>
                 <div class="sidebar-item__content">
                     <ul class="sidebar-category">
-                        @foreach($table as $item)
-                        <li class="sidebar-category__item"><a href="#" class="sidebar-category__item__link">{{$item->category}}</a></li>
+                        @foreach($game as $item)
+                            <li class="sidebar-category__item"><a href="{{$item->category}}" class="sidebar-category__item__link">{{$item->category}}</a></li>
                         @endforeach
-
                     </ul>
                 </div>
             </div>
             <div class="sidebar-item">
-                <div class="sidebar-item__title">Последние новости</div>
+              <div class="sidebar-item__title">Последние новости</div>
                 <div class="sidebar-item__content">
                     <div class="sidebar-news">
                         <div class="sidebar-news__item">
-                            <div class="sidebar-news__item__preview-news"><img src="img/cover/game-2.jpg" alt="image-new" class="sidebar-new__item__preview-new__image"></div>
+                            <div class="sidebar-news__item__preview-news"><img src="{{ asset('img/cover/game-2.jpg') }}" alt="image-new" class="sidebar-new__item__preview-new__image"></div>
                             <div class="sidebar-news__item__title-news"><a href="#" class="sidebar-news__item__title-news__link">О новых играх в режиме VR</a></div>
                         </div>
                         <div class="sidebar-news__item">
-                            <div class="sidebar-news__item__preview-news"><img src="img/cover/game-1.jpg" alt="image-new" class="sidebar-new__item__preview-new__image"></div>
+                            <div class="sidebar-news__item__preview-news"><img src="{{ asset('img/cover/game-1.jpg') }}" alt="image-new" class="sidebar-new__item__preview-new__image"></div>
                             <div class="sidebar-news__item__title-news"><a href="#" class="sidebar-news__item__title-news__link">О новых играх в режиме VR</a></div>
                         </div>
                         <div class="sidebar-news__item">
-                            <div class="sidebar-news__item__preview-news"><img src="img/cover/game-4.jpg" alt="image-new" class="sidebar-new__item__preview-new__image"></div>
+                            <div class="sidebar-news__item__preview-news"><img src="{{ asset('img/cover/game-4.jpg') }}" alt="image-new" class="sidebar-new__item__preview-new__image"></div>
                             <div class="sidebar-news__item__title-news"><a href="#" class="sidebar-news__item__title-news__link">О новых играх в режиме VR</a></div>
                         </div>
                     </div>
@@ -70,12 +69,12 @@
         <div class="main-content">
             <div class="content-top">
                 <div class="content-top__text">Купить игры неборого без регистрации смс с торента, получить компкт диск, скачать Steam игры после оплаты</div>
-                <div class="slider"><img src="img/slider.png" alt="Image" class="image-main"></div>
+                <div class="slider"><img src="{{ asset('img/slider.png')}}" alt="Image" class="image-main"></div>
             </div>
             <div class="content-middle">
                 <div class="content-head__container">
                     <div class="content-head__title-wrap">
-                        <div class="content-head__title-wrap__title bcg-title">Последние товары</div>
+                        <div class="content-head__title-wrap__title bcg-title">@yield('last-item')</div>
                     </div>
                     <div class="content-head__search-block">
                         <div class="search-container">
@@ -86,19 +85,14 @@
                         </div>
                     </div>
                 </div>
-                @yield('content')
-                <div class="content-footer__container">
-                    <ul class="page-nav">
-                        <li class="page-nav__item"><a href="#" class="page-nav__item__link"><i class="fa fa-angle-double-left"></i></a></li>
-                        <li class="page-nav__item"><a href="#" class="page-nav__item__link">1</a></li>
-                        <li class="page-nav__item"><a href="#" class="page-nav__item__link">2</a></li>
-                        <li class="page-nav__item"><a href="#" class="page-nav__item__link">3</a></li>
-                        <li class="page-nav__item"><a href="#" class="page-nav__item__link">4</a></li>
-                        <li class="page-nav__item"><a href="#" class="page-nav__item__link">5</a></li>
-                        <li class="page-nav__item"><a href="#" class="page-nav__item__link"><i class="fa fa-angle-double-right"></i></a></li>
-                    </ul>
+                <div class="content-main__container">
+                    <!-- Контент -->
+                    @yield('content')
                 </div>
+                @yield('content-footer__container')
+
             </div>
+
             <div class="content-bottom"></div>
         </div>
     </div>
@@ -139,6 +133,6 @@
         </div>
     </footer>
 </div>
-<script src="js/main.js"></script>
+<script src="{{ asset('js/main.js')}}"></script>
 </body>
 </html>

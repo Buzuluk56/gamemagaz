@@ -1,3 +1,4 @@
+
 @extends('layouts.views')
 
 @section('head-title')About - ГеймсМаркет@endsection
